@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sign-In Example</title>
+    <!-- Include Google Sign-In script -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <style>
+        /* Style the sign-in button */
+        #google-signin-button {
+            width: 100%;
+            display: inline-block;
+            background: #4285F4;
+            color: #fff;
+            border-radius: 4px;
+            padding: 10px 16px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Place the sign-in button -->
+    <div id="google-signin-button" onclick="onSignInClick()">
+        Sign in with Google
+    </div>
+
+
+    <script>
+        function onSignInClick() {
+            gapi.load('auth2', function () {
+                var auth2 = gapi.auth2.init({
+                    client_id: '874161933304-72qgr854ppds07e27jtotrjarobact55.apps.googleusercontent.com',
+                    // client_id: '325673912886-volvp63h3rctbm605lte1ml84p5kf3u5.apps.googleusercontent.com',
+                    cookiepolicy: 'single_host_origin'
+                });
+                auth2.signIn().then(onSuccess).catch(onFailure);
+            });
+        }
+
+        function onSuccess(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('Logged in as: ' + profile.getName());
+            // You can now use the profile information to authenticate the user on your server or perform other actions.
+        }
+
+        function onFailure(error) {
+            console.error('Sign-in failed:', error);
+        }
+
+        // Call initGoogleSignIn() when the page finishes loading
+        window.onload = function () {
+            initGoogleSignIn();
+        };
+
+
+
+      
+        
+    </script>
+</body>
+
+</html>
